@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.EEATechInterview" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="CustomDialogTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+</resources>

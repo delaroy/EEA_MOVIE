@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-kapt'
+    id 'org.jetbrains.kotlin.android'
+}
+
+def libs = rootProject.ext.libraryVersions
+def testLibs = rootProject.ext.testLibraryVersions
+
+android {
+    namespace 'com.engie.data'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 24
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+
+    implementation "androidx.core:core-ktx:1.12.0"
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libs.coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$libs.coroutines"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$libs.retrofit"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$libs.coroutinesAdapter"
+    implementation "com.squareup.okhttp3:okhttp:$libs.okhttp"
+
+    // Moshi
+    implementation "com.squareup.retrofit2:converter-moshi:$libs.moshi"
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$libs.timber"
+
+    // Koin
+    implementation "io.insert-koin:koin-android:$libs.koin"
+
+    // RxJava2
+    implementation "io.reactivex.rxjava2:rxjava:$libs.rxjava2"
+
+    // Test
+    testImplementation "junit:junit:$testLibs.junit"
+    testImplementation "androidx.arch.core:core-testing:$testLibs.lifecycle"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$testLibs.mockitoKotlin"
+    testImplementation "org.mockito:mockito-inline:$testLibs.mockitoInline"
+}

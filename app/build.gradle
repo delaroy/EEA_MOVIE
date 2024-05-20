@@ -1,0 +1,133 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+def libs = rootProject.ext.libraryVersions
+def plugin = rootProject.ext.plugin
+def testLibs = rootProject.ext.testLibraryVersions
+
+android {
+    namespace 'com.engie.eea_tech_interview'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.engie.eea_tech_interview"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    android.buildFeatures.buildConfig true
+    flavorDimensions = ["version"]
+    productFlavors {
+        production {
+            dimension "version"
+            buildConfigField ("String", "BASE_URL", BaseUrl)
+            buildConfigField ("String", "API_KEY", ApiKey)
+        }
+
+        staging {
+            dimension "version"
+            buildConfigField ("String", "BASE_URL", BaseUrl)
+            buildConfigField ("String", "API_KEY", ApiKey)
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+}
+
+dependencies {
+
+    def retrofitVersion = '2.9.0'
+    def moshiVersion = '1.13.0'
+
+    implementation project(':data')
+    implementation project(':domain')
+
+    implementation "androidx.core:core-ktx:1.12.0"
+    implementation "androidx.appcompat:appcompat:$libs.appCompat"
+    implementation "androidx.constraintlayout:constraintlayout:$libs.constraintLayout"
+    implementation "com.google.android.material:material:$libs.material"
+    testImplementation "junit:junit:$testLibs.junit"
+
+    // Arch
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$libs.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$libs.lifecycle"
+    implementation "androidx.navigation:navigation-fragment-ktx:$libs.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$libs.navigation"
+
+    // Coroutinesrdxd
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libs.coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$libs.coroutines"
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$libs.coroutines")
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$libs.timber"
+
+    implementation "io.insert-koin:koin-android:$libs.koin"
+    implementation "com.squareup.retrofit2:retrofit:$libs.retrofit"
+    implementation "com.squareup.okhttp3:okhttp:$libs.okhttp"
+    implementation "com.squareup.moshi:moshi:$libs.moshiKotlin"
+    implementation "com.squareup.retrofit2:converter-gson:$libs.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$libs.retrofit"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$libs.coroutinesAdapter"
+    implementation "com.squareup.okhttp3:logging-interceptor:$libs.okhttp"
+
+    // Rx
+    implementation "io.reactivex.rxjava2:rxandroid:$libs.rxandroid"
+
+    // Multidex
+    implementation "com.android.support:multidex:$libs.multiDex"
+
+    // Moshi
+    implementation "com.squareup.retrofit2:converter-moshi:$libs.moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$libs.moshiKotlin"
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$libs.moshiKotlin")
+
+    // Gson
+    implementation "com.google.code.gson:gson:$libs.gson"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$libs.glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$libs.glide"
+
+    // Unit test
+    testImplementation "junit:junit:$testLibs.junit"
+    testImplementation "androidx.arch.core:core-testing:$testLibs.lifecycle"
+    testImplementation "org.mockito:mockito-inline:$testLibs.mockitoInline"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$testLibs.mockitoKotlin"
+
+    // Integration test
+    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$testLibs.mockitoKotlin"
+    androidTestImplementation "org.mockito:mockito-android:$testLibs.mockito"
+    androidTestImplementation "androidx.arch.core:core-testing:$testLibs.lifecycle"
+    androidTestImplementation "androidx.test.ext:junit:$testLibs.testRunner"
+    androidTestImplementation "androidx.test:rules:$testLibs.testRunner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$testLibs.espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$testLibs.espresso"
+
+}
