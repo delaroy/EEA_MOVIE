@@ -17,6 +17,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import com.engie.domain.model.MovieData
+import com.engie.eea_tech_interview.R
 import com.engie.eea_tech_interview.databinding.MovieFragmentBinding
 import com.engie.eea_tech_interview.ui.adapter.MovieAdapter
 import com.engie.eea_tech_interview.ui.adapter.MovieDetailClick
@@ -79,7 +80,7 @@ class MovieFragment : Fragment(), MovieDetailClick {
                             actionMessage = "Retry"
                         ) {
                             viewModel.fetchMovies(
-                                query
+                                if (query.isEmpty()) resources.getString(R.string.default_movie_search) else query
                             )
                         }
                     }

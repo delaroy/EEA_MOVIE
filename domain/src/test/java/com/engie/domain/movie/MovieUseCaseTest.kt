@@ -18,7 +18,7 @@ class MovieUseCaseTest {
     }
 
     @Test
-    fun `call repository`() {
+    fun `call movie repository`() {
         runBlocking {
             // when we invoke the use case
             val movieRequestParam = MovieRequestParam(apiKey = "", query = "")

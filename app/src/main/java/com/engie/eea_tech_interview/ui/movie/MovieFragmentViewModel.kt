@@ -7,6 +7,7 @@ import com.engie.domain.model.MovieRequestParam
 import com.engie.domain.movie.GetMoviesUseCase
 import com.engie.domain.util.Resource
 import com.engie.eea_tech_interview.BuildConfig
+import com.engie.eea_tech_interview.R
 import com.engie.eea_tech_interview.util.Event
 import com.engie.eea_tech_interview.util.LiveEventResource
 import com.engie.eea_tech_interview.util.MutableLiveEventResource

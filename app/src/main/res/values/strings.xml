@@ -3,4 +3,5 @@
     <string name="welcome">Welcome to the EEA Code Challenge</string>
     <string name="movies">Movies</string>
     <string name="no_movie_at_the_moment">No movie at the moment</string>
+    <string name="default_movie_search">James Bond</string>
 </resources>
